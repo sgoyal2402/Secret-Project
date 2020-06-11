@@ -98,11 +98,14 @@ app.get("/register", (req, res) => {
 });
 
 app.get("/secrets", (req, res) => {
-    if(req.isAuthenticated()){
-        res.render('secrets');
-    }
-    else
-    res.redirect("/login");
+    User.find({"secret": {$ne: null}}, (err, docs) => {
+        if(err) console.log(err);
+        else{
+            if(docs){
+                res.render("secrets", {usersWithSecrets: docs});
+            }
+        }
+    });
 
 });
 
@@ -158,6 +161,7 @@ app.post("/login", (req, res) => {
     req.login(user, (err) => {
         if(err){
             console.log(err);
+            res.redirect("/login");
         }
         else{
             passport.authenticate("local")(req, res, () => {
