@@ -10,7 +10,7 @@ const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const findOrCreate = require("mongoose-findorcreate");
 
 const url =
-  "mongodb+srv://admin-surya:a1234567@cluster0-admca.mongodb.net/userDB";
+  "mongodb+srv://admin-surya:<password>@cluster0-admca.mongodb.net/userDB";
 const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
